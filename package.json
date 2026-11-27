@@ -1,0 +1,8 @@
+{
+  "name": "lovelace-round-sensor-card",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test test/card.test.mjs", "screenshot": "node test/screenshot.mjs" },
+  "devDependencies": { "jsdom": "^25.0.0", "playwright": "^1.48.0" }
+}
