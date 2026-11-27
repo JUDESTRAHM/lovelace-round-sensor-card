@@ -2,8 +2,6 @@
 
 A circular gauge for a single sensor in Home Assistant. The ring fills between a minimum and a maximum, the value sits in the middle, and the ring color can change with the value (stepped or blended). Use it as a normal dashboard card or as an element on a picture-elements card. No dependencies, one JavaScript file, a visual editor included.
 
-Ready-made dashboard layouts using this card: https://dashpack.judestrahm.workers.dev/
-
 It is written as a maintained replacement for `custom-cards/circle-sensor-card`, whose last commit was in 2021 and whose open issues include [#42 "Card doesn't work in HA 2024.2"](https://github.com/custom-cards/circle-sensor-card/issues/42) and [#40 "card not working in 2023.4 beta"](https://github.com/custom-cards/circle-sensor-card/issues/40).
 
 ![Round Sensor Card](https://raw.githubusercontent.com/JUDESTRAHM/lovelace-round-sensor-card/main/screenshot.png)
@@ -70,6 +68,53 @@ elements:
 | `tap_action` | `more-info` | `more-info`, `navigate` (`navigation_path`), `url` (`url_path`), `call-service` / `perform-action` (`service` or `perform_action`, `data`, `target`), or `none`. |
 
 The editor covers the common options; `color_stops` and `font_style` are YAML only.
+
+## Example dashboard
+
+A small sample view you can paste into the raw configuration editor (replace the placeholder entity ids with your own):
+
+```yaml
+title: Climate
+path: climate
+type: sections
+max_columns: 2
+sections:
+  - type: grid
+    cards:
+      - type: heading
+        heading: Temperatures
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: custom:round-sensor-card
+            entity: sensor.living_room_temperature
+            name: Living
+            min: 10
+            max: 35
+            show_card: true
+            gradient: true
+            color_stops:
+              10: "#4aa3ff"
+              21: "#43a047"
+              28: "#ffb300"
+              35: "#e53935"
+          - type: custom:round-sensor-card
+            entity: sensor.living_room_humidity
+            name: Humidity
+            min: 0
+            max: 100
+            show_card: true
+            gradient: true
+            color_stops:
+              20: "#ffb300"
+              40: "#43a047"
+              80: "#4aa3ff"
+      - type: tile
+        entity: climate.thermostat
+```
+
+8 more ready-made views (living room, bedroom, kitchen, cameras, security, energy, mobile) are in the Home Dashboard Layout Pack ($9): https://dashpack.judestrahm.workers.dev/
 
 ## Migrating from `custom:circle-sensor-card`
 
