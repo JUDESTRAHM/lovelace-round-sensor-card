@@ -1,63 +1,91 @@
-# HA Card Template
+# Round Sensor Card
 
-![Illustrative preview of the example card](docs/preview.svg)
+A circular gauge for a single sensor in Home Assistant. The ring fills between a minimum and a maximum, the value sits in the middle, and the ring color can change with the value (stepped or blended). Use it as a normal dashboard card or as an element on a picture-elements card. No dependencies, one JavaScript file, a visual editor included.
 
-Reusable starter for Home Assistant Lovelace custom cards. **This repository is a development template, not a finished card for the HACS catalog.**
+It is written as a maintained replacement for `custom-cards/circle-sensor-card`, whose last commit was in 2021 and whose open issues include [#42 "Card doesn't work in HA 2024.2"](https://github.com/custom-cards/circle-sensor-card/issues/42) and [#40 "card not working in 2023.4 beta"](https://github.com/custom-cards/circle-sensor-card/issues/40).
 
-## Features
-- Minimal working custom card and visual editor with entity selection, accent color and name visibility.
-- Seven languages: English, Spanish, Portuguese, French, German, Italian and Dutch.
-- Responsive styling using Home Assistant theme variables, HTML escaping and safe unavailable states.
-- `hacs.json`, HACS validation workflow, Node.js syntax and smoke tests.
-- `main` for reviewed code; `develop` for changes.
+![Round Sensor Card](https://raw.githubusercontent.com/JUDESTRAHM/lovelace-round-sensor-card/main/screenshot.png)
 
-## Create a new card
-1. Click **Use this template** (repository owner must enable **Template repository** in Settings).
-2. Follow [New project checklist](docs/NEW_PROJECT.md) to rename the card, editor, resource and tests.
-3. Replace sample functionality, customize the editor, document the configuration and test on Home Assistant.
-4. Validate using `node --check ha-card-template.js` and `node --test tests/card.test.cjs`.
-5. Publish a release and request inclusion in HACS **only for the finished, validated project**.
+_The screenshot is rendered from a mocked `hass` object in a test page (see `test/`). This card has not been tested in a real Home Assistant install yet; please report anything that differs._
 
-### Example configuration
+## Install
+
+HACS: open HACS, search for "Round Sensor Card" under Frontend, download, reload the browser.
+
+Manual: copy `round-sensor-card.js` to `config/www/`, then add a dashboard resource `/local/round-sensor-card.js` of type `JavaScript module`.
+
+## Use
+
+Add the card from the card picker ("Round Sensor Card") or in YAML:
+
 ```yaml
-type: custom:ha-card-template
-entity: sensor.example
-accent: "#00a6d6"
-show_name: true
+type: custom:round-sensor-card
+entity: sensor.living_room_temperature
+name: Living room
+min: 10
+max: 35
+show_card: true
+gradient: true
+color_stops:
+  20: "#4aa3ff"
+  28: "#ffb300"
+  35: "#e53935"
 ```
-Load `ha-card-template.js` as a Lovelace JavaScript module before using the example card. No user-specific entities or credentials are included.
 
-## Scope
-The editor and sample entity card are functional starting points, **not** a complete block-based card builder. Reuse architectural patterns rather than copying XPeng/Snapmaker hardware-specific behavior. A future universal card is a separate project.
+As a picture-elements element (sizing and position come from `style`):
 
----
-
-# Plantilla de tarjetas Home Assistant
-
-Base reutilizable para desarrollar tarjetas personalizadas de Lovelace. **Este repositorio es una plantilla de desarrollo, no una tarjeta terminada para el catálogo de HACS.**
-
-## Funciones
-- Tarjeta mínima y editor visual con selección de entidad, color de acento y visibilidad del nombre.
-- Siete idiomas: inglés, español, portugués, francés, alemán, italiano y neerlandés.
-- Diseño adaptable mediante variables de tema de Home Assistant, escape de HTML y gestión de estados no disponibles.
-- Configuración `hacs.json`, validación HACS, pruebas sintácticas y pruebas básicas Node.js.
-- Rama `main` para código revisado y `develop` para desarrollo.
-
-## Crear una tarjeta nueva
-1. Pulsa **Use this template** (el propietario debe activar **Template repository** en Settings).
-2. Sigue la [lista de nuevo proyecto](docs/NEW_PROJECT.md) para renombrar tarjeta, editor, recurso y pruebas.
-3. Sustituye la lógica de ejemplo, personaliza el editor, documenta las opciones y prueba en Home Assistant.
-4. Ejecuta `node --check ha-card-template.js` y `node --test tests/card.test.cjs`.
-5. Publica una Release y solicita la inclusión en HACS **solo cuando el proyecto nuevo esté terminado y validado**.
-
-### Configuración de ejemplo
 ```yaml
-type: custom:ha-card-template
-entity: sensor.example
-accent: "#00a6d6"
-show_name: true
+type: picture-elements
+image: /local/floorplan.png
+elements:
+  - type: custom:round-sensor-card
+    entity: sensor.living_room_temperature
+    max: 35
+    style:
+      top: 30%
+      left: 40%
+      width: 70px
+      height: 70px
 ```
-Antes de usarla, añade `ha-card-template.js` como recurso JavaScript de Lovelace. No se incluyen entidades ni credenciales personales.
 
-## Alcance
-El editor y la tarjeta de ejemplo son puntos de partida funcionales, **no** un constructor completo de bloques. La futura tarjeta universal será un proyecto independiente.
+| Key | Default | Description |
+| --- | --- | --- |
+| `entity` | required | Any entity with a numeric state or numeric attribute. |
+| `name` | none | Small label above the value. |
+| `min`, `max` | `0`, `100` | Ring range. The ring is clamped to it. |
+| `attribute` | none | Show this attribute instead of the state. |
+| `attribute_max` | none | Use this numeric attribute of the entity as the maximum. |
+| `show_max` | `false` | Print `/ max` under the value. |
+| `units` | entity unit | Override the unit. A blank string (`" "`) hides it. |
+| `decimals` | auto | Fixed number of decimals; by default up to 2. |
+| `show_card` | `false` | Wrap the gauge in an `ha-card`. Leave off for picture-elements. |
+| `stroke_width`, `stroke_bg_width` | `6`, same | Ring and track thickness (1-20). |
+| `stroke_color`, `stroke_bg_color` | `#03a9f4`, `#999999` | Ring and track colors. |
+| `fill` | `transparent` | Color inside the ring. |
+| `color_stops` | none | Map of value to color. Step mode: the lowest stop at or above the reading wins; past the last stop the last color stays. |
+| `gradient` | `false` | Blend between stops (stops given as `#rgb` or `#rrggbb`; other color forms fall back to step). |
+| `font_style` | none | CSS for the value: `color`, `font-size`, `font-family`, `font-weight`, `font-style`, `text-shadow`, `letter-spacing`, `text-transform`. Other properties are ignored. |
+| `tap_action` | `more-info` | `more-info`, `navigate` (`navigation_path`), `url` (`url_path`), `call-service` / `perform-action` (`service` or `perform_action`, `data`, `target`), or `none`. |
+
+The editor covers the common options; `color_stops` and `font_style` are YAML only.
+
+## Migrating from `custom:circle-sensor-card`
+
+Change `type: custom:circle-sensor-card` to `type: custom:round-sensor-card` and the resource URL to this card's file. These keys carry over with the same meaning: `entity`, `name`, `min`, `max`, `show_card`, `stroke_width`, `stroke_color`, `stroke_bg_width`, `stroke_bg_color`, `color_stops`, `gradient`, `units`, `attribute`, `attribute_max`, `show_max`, `font_style` (restricted to the properties above), `fill`.
+
+Differences to know about:
+
+- `fill` defaults to `transparent` instead of a translucent white disc, so text stays readable on dark themes. Set it explicitly if you want the old look.
+- `font_style` only accepts the listed properties.
+- Tapping opens the entity's more-info dialog by default (configurable with `tap_action`).
+- Everything else in the old card's options that is not listed above is not supported.
+
+## Development
+
+```
+npm install
+npm test          # jsdom tests against a mocked hass
+npm run screenshot  # needs Playwright's Chromium; set CHROME_PATH to use another build
+```
+
+MIT licensed. Independent implementation; no code was copied from other cards.
