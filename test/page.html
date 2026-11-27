@@ -1,0 +1,31 @@
+<!doctype html><meta charset="utf-8">
+<style>
+:root{--primary-text-color:#e1e1e1;--secondary-text-color:#9b9b9b;--primary-color:#03a9f4}
+body{margin:0;padding:24px;background:#111;font-family:Roboto,-apple-system,Helvetica,Arial,sans-serif;width:512px;display:flex;gap:16px;flex-wrap:wrap}
+round-sensor-card{width:110px}
+round-sensor-card.rsc-card{width:150px}
+</style>
+<body id="b"></body>
+<script>
+// Test harness only: stand-in for ha-card, which Home Assistant provides.
+customElements.define("ha-card",class extends HTMLElement{constructor(){super();this.style.cssText="display:block;background:#1c1c1c;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.5);color:#e1e1e1"}});
+</script>
+<script type="module">
+import "../round-sensor-card.js";
+const h={states:{
+ "sensor.t":{state:"21.5",attributes:{friendly_name:"Living room",unit_of_measurement:"°C"}},
+ "sensor.h":{state:"68",attributes:{friendly_name:"Humidity",unit_of_measurement:"%"}},
+ "sensor.b":{state:"14",attributes:{friendly_name:"Battery",unit_of_measurement:"%"}},
+ "sensor.p":{state:"3.2",attributes:{friendly_name:"Power",unit_of_measurement:"kW"}},
+},callService(){}};
+const cfgs=[
+ {entity:"sensor.t",name:"Living room",min:10,max:35,show_card:true,color_stops:{20:"#4aa3ff",28:"#ffb300",35:"#e53935"},gradient:true},
+ {entity:"sensor.h",name:"Humidity",show_card:true,stroke_color:"#26a69a",decimals:0},
+ {entity:"sensor.b",name:"Battery",show_card:true,color_stops:{20:"#e53935",50:"#ffb300",100:"#43a047"}},
+ {entity:"sensor.p",name:"Power",max:5,show_max:true,show_card:true,stroke_color:"#ab47bc",stroke_width:9},
+ {entity:"sensor.h",stroke_width:10,stroke_bg_color:"#444",decimals:0},
+ {entity:"sensor.b",stroke_width:4,color_stops:{20:"#e53935",100:"#43a047"},decimals:0},
+];
+for(const c of cfgs){const e=document.createElement("round-sensor-card");document.body.appendChild(e);e.setConfig(c);e.hass=h}
+setTimeout(()=>document.title="ready",200);
+</script>
