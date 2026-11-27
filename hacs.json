@@ -1,6 +1,4 @@
 {
-  "name": "HA Card Template",
-  "content_in_root": true,
-  "filename": "ha-card-template.js",
+  "name": "Round Sensor Card",
   "render_readme": true
 }
