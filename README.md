@@ -2,6 +2,8 @@
 
 A circular gauge for a single sensor in Home Assistant. The ring fills between a minimum and a maximum, the value sits in the middle, and the ring color can change with the value (stepped or blended). Use it as a normal dashboard card or as an element on a picture-elements card. No dependencies, one JavaScript file, a visual editor included.
 
+Ready-made dashboard layouts using this card: https://dashpack.judestrahm.workers.dev/
+
 It is written as a maintained replacement for `custom-cards/circle-sensor-card`, whose last commit was in 2021 and whose open issues include [#42 "Card doesn't work in HA 2024.2"](https://github.com/custom-cards/circle-sensor-card/issues/42) and [#40 "card not working in 2023.4 beta"](https://github.com/custom-cards/circle-sensor-card/issues/40).
 
 ![Round Sensor Card](https://raw.githubusercontent.com/JUDESTRAHM/lovelace-round-sensor-card/main/screenshot.png)
