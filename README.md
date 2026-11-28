@@ -138,6 +138,9 @@ Differences to know about:
 - [lovelace-zha-device-table-card](https://github.com/JUDESTRAHM/lovelace-zha-device-table-card): Sortable table of ZHA (Zigbee) devices with LQI, RSSI, availability and last seen for Home Assistant dashboards (in HACS default)
 - [lovelace-desk-height-card](https://github.com/JUDESTRAHM/lovelace-desk-height-card): Sit/stand desk card for Home Assistant: live height, animated desk drawing, up/down/stop and height presets. Replaces the unmaintained linak-desk-card (in HACS default)
 - [lovelace-energy-wheel-card](https://github.com/JUDESTRAHM/lovelace-energy-wheel-card): Home Assistant card: solar, grid, home and battery as a wheel of animated arrows, with power, energy and money views (HACS custom repository; default listing pending)
+- [lovelace-light-controls-row](https://github.com/JUDESTRAHM/lovelace-light-controls-row): Home Assistant entities-card row for lights: toggle, brightness, color temperature, color sliders, picker and buttons (HACS custom repository; default listing pending)
+- [lovelace-media-shelf-card](https://github.com/JUDESTRAHM/lovelace-media-shelf-card): Home Assistant card: browse playlists or albums of a media player as a cover grid, pick the speaker, tap to play (HACS custom repository; default listing pending)
+- [lovelace-light-popup-sheet-card](https://github.com/JUDESTRAHM/lovelace-light-popup-sheet-card): Home Assistant light tile that opens a full-screen sheet with a big brightness slider and action buttons. Replaces the unmaintained light-popup-card (HACS custom repository; default listing pending)
 
 ## Development
 
