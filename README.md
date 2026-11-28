@@ -127,6 +127,18 @@ Differences to know about:
 - Tapping opens the entity's more-info dialog by default (configurable with `tap_action`).
 - Everything else in the old card's options that is not listed above is not supported.
 
+## More cards by the same author
+
+- [activity-feed-card](https://github.com/JUDESTRAHM/activity-feed-card): Activity feed card for Home Assistant: entity changes, calendar events and notifications in one timeline (maintained replacement for home-feed-card) (in HACS default)
+- [lovelace-room-banner-card](https://github.com/JUDESTRAHM/lovelace-room-banner-card): Home Assistant Lovelace card: a linkable room banner with a heading and live entity glances. Dependency-free, with a visual editor (in HACS default)
+- [lovelace-glance-weather-card](https://github.com/JUDESTRAHM/lovelace-glance-weather-card): A compact Home Assistant weather card: condition, temperature, high/low and a few details, with a visual editor (in HACS default)
+- [lovelace-camera-wall-card](https://github.com/JUDESTRAHM/lovelace-camera-wall-card): Lovelace camera card: one big camera plus thumbnails, jumps to the camera with motion. Visual editor, no dependencies (in HACS default)
+- [lovelace-board-monitor-card](https://github.com/JUDESTRAHM/lovelace-board-monitor-card): Status card for single-board computers reporting over MQTT: temperature, CPU, memory, disk, OS, updates (in HACS default)
+- [lovelace-entity-panel-card](https://github.com/JUDESTRAHM/lovelace-entity-panel-card): Shows the controls of an entity's more-info dialog inline as a Home Assistant card (in HACS default)
+- [lovelace-zha-device-table-card](https://github.com/JUDESTRAHM/lovelace-zha-device-table-card): Sortable table of ZHA (Zigbee) devices with LQI, RSSI, availability and last seen for Home Assistant dashboards (in HACS default)
+- [lovelace-desk-height-card](https://github.com/JUDESTRAHM/lovelace-desk-height-card): Sit/stand desk card for Home Assistant: live height, animated desk drawing, up/down/stop and height presets. Replaces the unmaintained linak-desk-card (in HACS default)
+- [lovelace-energy-wheel-card](https://github.com/JUDESTRAHM/lovelace-energy-wheel-card): Home Assistant card: solar, grid, home and battery as a wheel of animated arrows, with power, energy and money views (HACS custom repository; default listing pending)
+
 ## Development
 
 ```
